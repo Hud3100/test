@@ -1,11 +1,23 @@
 <h1>投稿一覧</h1>
 <% @posts.each do |post| %>
   <hr>
-  <p><span>タイトル:</span><%= post.title %>
-  <p><span>内容:</span><%= post.content %>
+  <p><span>タイトル:</span><%= post.title %></p>
+  <p><span>内容:</span><%= post.content %></p>
+  <% if post.comments.any? %>
+    <% post.comments.each do |c| %>
+      <p><span><%= c.content %></span></p>
+    <% end %>
+  <% end %>
+  <% if current_user %>
+    <%= form_for @comment do |f| %>
+      <%= f.text_field :content %>
+      <%=  f.hidden_field :post_id, value: post.id %>
+      <%= f.submit 'コメントする' %>
+    <% end %>
+  <% end %>
 <% end %>
-
 <% if current_user %>
+  <p>投稿する</p>
   <%= form_for @post do |f| %>
     <%= f.label :title, 'タイトル' %>
     <%= f.text_area :title %>
