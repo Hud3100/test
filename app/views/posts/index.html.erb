@@ -1,11 +1,15 @@
-<h1>投稿一覧</h1>
-
-<p>投稿やコメントを検索</p>
-<%= form_with url: search_path, method: :get, local: true do |f| %>
-  <%= f.text_field :search %>
-  <%= f.submit '検索' %>
-<% end %>
-
+<div class="d-flex justify-content-between">
+  <div>
+    <h2>投稿一覧</h2>
+  </div>
+  <div class="form-group">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.label '投稿やコメントを検索' %>
+      <%= f.text_field :search %>
+      <%= f.submit '検索', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div><hr>
 <% @posts.each do |post| %>
   <hr>
   <span>カテゴリ</span>
@@ -47,5 +51,5 @@
     <%= f.submit '投稿するぜ' %>
   <% end %>
 <% else %>
-  <p>投稿の前にログインをお願いします。</p>
+  <p>投稿の前に<%= link_to 'ログイン', new_user_session_path %>をお願いします。</p>
 <% end %>

@@ -9,13 +9,17 @@
   </head>
   <body>
     <header>
-      <nav>
-        <%= link_to '5ch', root_path %>
+      <nav class="navbar navbar-light navbar-expand-sm" style="background-color:#e3f2fd;">
+          <%= link_to '5chホーム', root_path, class: 'nav-item nav-link' %>
         <% if user_signed_in? %>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
         <% else %>
-          <%= link_to 'サインアップ', new_user_registration_path %>
-          <%= link_to 'ログイン', new_user_session_path %>
+        <div class="nav-item">
+          <%= link_to 'サインアップ', new_user_registration_path, class: 'nav-link' %>
+        </div>
+        <div class="nav-item">
+          <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
+        </div>
         <% end %>
       </nav>
     </header>
