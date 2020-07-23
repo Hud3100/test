@@ -6,6 +6,7 @@ AllCops:
     - 'config/**/*'
     - 'bin/*'
     - 'tmp/**/*'
+    - 'Gemfile'
 
 Rails:
   Enabled: true
