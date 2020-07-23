@@ -1,9 +1,14 @@
 <h1>投稿一覧</h1>
 <% @posts.each do |post| %>
   <hr>
+  <span>カテゴリ</span>
+  <% post.categories.each do |category| %>
+    <%= category.name %>
+  <% end %>
   <p><span>タイトル:</span><%= post.title %></p>
   <p><span>内容:</span><%= post.content %></p>
   <% if post.comments.any? %>
+    <p>コメント</p>
     <% post.comments.each do |c| %>
       <p><span><%= c.content %></span></p>
     <% end %>
@@ -23,7 +28,16 @@
     <%= f.text_area :title %>
     <%= f.label :content, '内容' %>
     <%= f.text_field :content %>
-    <%= f.submit %>
+    <p>
+      <%= f.label :category, 'カテゴリ' %>
+      <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+        <%= category.label do %>
+          <%= category.check_box %>
+          <%= category.text %>
+        <% end %>
+      <% end %>
+    </p>
+    <%= f.submit '投稿するぜ' %>
   <% end %>
 <% else %>
   <p>投稿の前にログインをお願いします。</p>
