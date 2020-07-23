@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   }
   resources :posts, only: [:index, :create]
   resources :comments, only: [:create]
+  get 'search' => 'search#index'
 end
