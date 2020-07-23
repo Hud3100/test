@@ -1,0 +1,26 @@
+AllCops:
+  TargetRubyVersion: 2.5.3
+
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/*'
+    - 'tmp/**/*'
+
+Rails:
+  Enabled: true
+
+AsciiComments:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+LineLength:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
