@@ -9,4 +9,10 @@ module LoginMacros
   def logout
     click_link 'ログアウト'
   end
+
+  def act_as(user)
+    login user
+    yield
+    logout
+  end
 end
