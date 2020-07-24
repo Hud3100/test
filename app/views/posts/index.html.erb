@@ -5,40 +5,48 @@
   <div class="form-group">
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.label '投稿やコメントを検索' %>
-      <%= f.text_field :search %>
+      <%= f.text_field :search, id: 'search-form' %>
       <%= f.submit '検索', class: "btn btn-primary" %>
     <% end %>
   </div>
-</div><hr>
-<% @posts.each do |post| %>
-  <hr>
-  <span>カテゴリ</span>
-  <% post.categories.each do |category| %>
-    <%= category.name %>
-  <% end %>
-  <p><span>タイトル:</span><%= post.title %></p>
-  <p><span>内容:</span><%= post.content %></p>
-  <% if post.comments.any? %>
-    <p>コメント</p>
-    <% post.comments.each do |c| %>
-      <p><span><%= c.content %></span></p>
+</div>
+<hr>
+<% if @posts %>
+  <% @posts.each do |post| %>
+    <hr>
+    <span>カテゴリ</span>
+    <% post.categories.each do |category| %>
+      <%= category.name %>
     <% end %>
-  <% end %>
-  <% if current_user %>
-    <%= form_for @comment do |f| %>
-      <%= f.text_field :content %>
-      <%=  f.hidden_field :post_id, value: post.id %>
-      <%= f.submit 'コメントする' %>
+    <p><span>タイトル:</span><%= post.title %></p>
+    <p><span>内容:</span><%= post.content %></p>
+    <% if post.comments.any? %>
+      <p>コメント</p>
+      <% post.comments.each do |c| %>
+        <p><span><%= c.content %></span></p>
+      <% end %>
+    <% end %>
+    <% if current_user %>
+      <%= form_for @comment do |f| %>
+        <%= f.text_field :content, id: 'comment' %>
+        <%=  f.hidden_field :post_id, value: post.id %>
+        <%= f.submit 'コメントする' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
 <% if current_user %>
   <p>投稿する</p>
   <%= form_for @post do |f| %>
-    <%= f.label :title, 'タイトル' %>
-    <%= f.text_area :title %>
-    <%= f.label :content, '内容' %>
-    <%= f.text_field :content %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group">
+      <%= f.label :title, 'タイトル' %>
+      <%= f.text_area :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, '内容' %>
+      <%= f.text_field :content, class: "form-control" %>
+    </div>
     <p>
       <%= f.label :category, 'カテゴリ' %>
       <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
@@ -48,7 +56,7 @@
         <% end %>
       <% end %>
     </p>
-    <%= f.submit '投稿するぜ' %>
+    <%= f.submit '投稿する', class: "btn btn-light" %>
   <% end %>
 <% else %>
   <p>投稿の前に<%= link_to 'ログイン', new_user_session_path %>をお願いします。</p>

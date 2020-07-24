@@ -20,6 +20,9 @@
         <div class="nav-item">
           <%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %>
         </div>
+        <div class="nav-item">
+          <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post %>
+        </div>
         <% end %>
       </nav>
     </header>
