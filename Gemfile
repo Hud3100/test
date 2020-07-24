@@ -21,6 +21,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -35,6 +36,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
   gem 'selenium-webdriver'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
