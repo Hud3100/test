@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature '総合テスト' do
-  let!(:user){ create(:user) }
-  let!(:anotheruser){ create(:user, email: 'another@another.com') }
+  let!(:user) { create(:user) }
+  let!(:anotheruser) { create(:user, email: 'another@another.com') }
   background do
   end
 
